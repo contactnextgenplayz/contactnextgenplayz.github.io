@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXTGENPLAYZ | Ultra 4K Gaming Experience</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- SEO & Meta -->
+    <meta name="description" content="Professional 4K gameplay captures, cinematic trailers, and technical showcases for developers & publishers. PS5 Pro, Xbox Series X, RTX 4090 gaming.">
+    <meta name="keywords" content="4K gaming, gameplay capture, PS5 Pro, Xbox Series X, PC gaming, cinematic trailers, nextgen gaming, The Last of Us, Tomb Raider, Spider-Man, Indiana Jones, Hitman, Call of Duty">
+    <meta name="author" content="NEXTGENPLAYZ">
+    <meta name="theme-color" content="#050505">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nextgenplayz.com/">
+    <meta property="og:title" content="NEXTGENPLAYZ | Ultra 4K Gaming Experience">
+    <meta property="og:description" content="Professional 4K gameplay captures, cinematic trailers, and technical showcases.">
+    <meta property="og:image" content="https://nextgenplayz.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nextgenplayz.com/">
+    <meta property="twitter:title" content="NEXTGENPLAYZ | Ultra 4K Gaming Experience">
+    <meta property="twitter:description" content="Professional 4K gameplay captures, cinematic trailers, and technical showcases.">
+    <meta property="twitter:image" content="https://nextgenplayz.com/twitter-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <style>
+        /* === CSS RESET & VARIABLES === */
+        :root {
+            --bg-dark: #050505;
+            --bg-light: #f8f9fa;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-light: rgba(0, 0, 0, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --bg-card-hover-light: rgba(0, 0, 0, 0.07);
+            --accent: #E31C25;
+            --accent-glow: rgba(227, 28, 37, 0.4);
+            --accent-secondary: #00D4FF;
+            --text-main: #FFFFFF;
+            --text-main-light: #050505;
+            --text-muted: #9CA3AF;
+            --text-muted-light: #6B7280;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+            --section-padding: clamp(80px, 10vw, 140px);
+        }
+
+        /* Light Mode Variables */
+        .light-mode {
+            --bg-dark: var(--bg-light);
+            --bg-card: var(--bg-card-light);
+            --bg-card-hover: var(--bg-card-hover-light);
+            --text-main: var(--text-main-light);
+            --text-muted: var(--text-muted-light);
+            --border: var(--border-light);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        html { 
+            scroll-behavior: smooth; 
+            font-size: 16px;
+        }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(227, 28, 37, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(20, 20, 20, 1) 0px, transparent 50%);
+            background-attachment: fixed;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .light-mode body {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(227, 28, 37, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(248, 249, 250, 1) 0px, transparent 50%);
+        }
+
+        /* === TYPOGRAPHY === */
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .light-mode h2 {
+            background: linear-gradient(to right, #050505, #4B5563);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* === LAYOUT === */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section { 
+            padding: var(--section-padding) 0; 
+            position: relative; 
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: clamp(40px, 6vw, 80px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--ease);
+        }
+        
+        .section-header.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.6);
+        }
+        
+        .light-mode header {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        header.scrolled { 
+            padding: 15px 0; 
+            background: rgba(5, 5, 5, 0.95); 
+            backdrop-filter: blur(15px);
+        }
+
+        .light-mode header.scrolled {
+            background: rgba(248, 249, 250, 0.95);
+        }
+
+        .nav-wrapper { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: rotate(15deg);
+        }
+
+        /* LOGO */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            z-index: 1001;
+        }
+        
+        .brand span { color: var(--accent); }
+
+        .logo-img {
+            width: 48px; 
+            height: 48px; 
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+        
+        .logo-fallback {
+            width: 48px; 
+            height: 48px;
+            background: var(--accent);
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* NAVIGATION */
+        .desktop-nav { 
+            display: flex; 
+            gap: 40px; 
+            align-items: center;
+        }
+        
+        .desktop-nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .desktop-nav a:hover,
+        .desktop-nav a:focus { 
+            color: var(--text-main); 
+            outline: none;
+        }
+
+        .mobile-toggle { 
+            display: none; 
+            flex-direction: column;
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: var(--text-main);
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .mobile-toggle span:last-child {
+            margin-bottom: 0;
+        }
+
+        .mobile-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* === BACK TO TOP BUTTON === */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(227, 28, 37, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #c11820;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(227, 28, 37, 0.4);
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(5,5,5,0.7) 0%, rgba(5,5,5,1) 100%),
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .light-mode .hero {
+            background: linear-gradient(180deg, rgba(248,249,250,0.7) 0%, rgba(248,249,250,1) 100%),
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop');
+        }
+
+        .hero::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+            pointer-events: none;
+        }
+
+        .light-mode .hero::before {
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+            opacity: 0;
+            animation: heroFadeIn 1s var(--ease) forwards 0.5s;
+        }
+
+        @keyframes heroFadeIn { 
+            from { 
+                opacity: 0; 
+                transform: translateY(40px); 
+            } 
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            } 
+        }
+
+        /* GLITCH EFFECT */
+        .glitch-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .glitch-title::before,
+        .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-title::before {
+            animation: glitch-1 0.5s infinite;
+            color: #FF00FF;
+            z-index: -1;
+        }
+
+        .glitch-title::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00FFFF;
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes glitch-2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, 2px); }
+            80% { transform: translate(-2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: transparent;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .light-mode .btn-secondary:hover,
+        .light-mode .btn-secondary:focus {
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* === POPULAR CONTENT SECTION === */
+        .popular-content {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .light-mode .popular-content {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(227, 28, 37, 0.1), transparent);
+            transition: left 0.6s var(--ease);
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .game-card h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .game-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* === PURE PERFORMANCE SECTION === */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .light-mode .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-head);
+        }
+
+        .stat-card p {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* === SERVICES SECTION === */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: var(--bg-card-hover);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .card h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .card p { 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+        }
+
+        /* === HARDWARE SECTION === */
+        .hardware-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hardware-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* HARDWARE TEXT FRAMES */
+        .hardware-text-frame {
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 20px 40px;
+            text-align: center;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+            min-width: 150px;
+            box-shadow: 0 4px 20px rgba(227, 28, 37, 0.1);
+        }
+
+        .hardware-text-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(227, 28, 37, 0.1), transparent);
+            transition: left 0.6s var(--ease);
+        }
+
+        .hardware-text-frame:hover::before {
+            left: 100%;
+        }
+
+        .hardware-text-frame:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(227, 28, 37, 0.2);
+            border-color: var(--accent-secondary);
+        }
+
+        .hardware-text-frame h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .light-mode .hardware-text-frame {
+            background: var(--bg-card-light);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* === CONTACT SECTION === */
+        .contact-section-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-card {
+            background: linear-gradient(145deg, #0f0f0f, #0a0a0a);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .light-mode .info-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        }
+
+        /* Neon border effect on top */
+        .info-card::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 80%; 
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .light-mode .info-row {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .info-row.clickable:hover {
+            background: rgba(227, 28, 37, 0.1);
+            cursor: pointer;
+        }
+
+        .info-icon-box {
+            width: 48px; 
+            height: 48px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .light-mode .info-icon-box {
+            background: rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .info-content h4 {
+            color: var(--text-main);
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .info-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Platform Badges */
+        .platform-list {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #000;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            font-size: 0.8rem;
+            color: #ccc;
+            transition: border-color 0.3s;
+            text-decoration: none;
+        }
+
+        .light-mode .platform-badge {
+            background: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .info-row.clickable:hover .platform-badge { 
+            border-color: var(--accent); 
+        }
+
+        .plat-svg { 
+            width: 16px; 
+            height: 16px; 
+            fill: currentColor; 
+        }
+
+        /* === FOOTER === */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0;
+            text-align: center;
+            background: #020202;
+        }
+
+        .light-mode footer {
+            background: #f8f9fa;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: inline-block;
+            color: var(--text-main);
+        }
+        
+        .footer-logo span { 
+            color: var(--accent); 
+        }
+        
+        .footer-copy { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+            margin-bottom: 20px; 
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* === LOADING SPINNER === */
+        .loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* === SCROLLBAR === */
+        ::-webkit-scrollbar { 
+            width: 8px; 
+        }
+        
+        ::-webkit-scrollbar-track { 
+            background: var(--bg-dark); 
+        }
+
+        .light-mode ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+        
+        ::-webkit-scrollbar-thumb { 
+            background: #333; 
+            border-radius: 4px; 
+        }
+
+        .light-mode ::-webkit-scrollbar-thumb {
+            background: #ccc;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover { 
+            background: var(--accent); 
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 992px) {
+            .hero-content { 
+                padding-top: 60px; 
+            }
+            
+            .hardware-grid { 
+                gap: 40px; 
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                position: fixed; 
+                top: 0; 
+                right: 0; 
+                width: 80%; 
+                height: 100vh;
+                background: #0a0a0a; 
+                flex-direction: column; 
+                justify-content: center;
+                padding: 40px; 
+                transform: translateX(100%); 
+                transition: transform 0.4s ease;
+                border-left: 1px solid var(--border);
+            }
+
+            .light-mode .desktop-nav {
+                background: #f8f9fa;
+            }
+            
+            .desktop-nav.active { 
+                transform: translateX(0); 
+            }
+            
+            .mobile-toggle { 
+                display: flex; 
+            }
+            
+            .info-row { 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            
+            .platform-list { 
+                width: 100%; 
+            }
+            
+            .hero-btn-group { 
+                flex-direction: column; 
+            }
+            
+            .hardware-grid { 
+                gap: 30px; 
+            }
+            
+            .hardware-item { 
+                flex: 0 0 calc(50% - 15px); 
+            }
+            
+            .footer-links { 
+                flex-direction: column; 
+                gap: 15px; 
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section { 
+                padding: 60px 0; 
+            }
+            
+            .hardware-item { 
+                flex: 0 0 100%; 
+            }
+            
+            .info-card { 
+                padding: 20px; 
+            }
+
+            .game-card {
+                padding: 30px 20px;
+            }
+
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* === ACCESSIBILITY === */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* === PERFORMANCE OPTIMIZATIONS === */
+        .lazy {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy.loaded {
+            opacity: 1;
+        }
+    
+        /* Remove underlines */
+        header a, .brand, .brand a, .desktop-nav a, .mobile-toggle, .hero-btn-group a, .btn-primary, .btn-secondary {
+            text-decoration: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            background-image: none !important;
+        }
+
+        header a::after, .desktop-nav a::after, .btn-primary::after, .btn-secondary::after, .brand::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        header a:hover, header a:focus, .desktop-nav a:hover, .desktop-nav a:focus, .btn-primary:hover, .btn-primary:focus, .btn-secondary:hover, .btn-secondary:focus {
+            text-decoration: none !important;
+            border-bottom: none !important;
+            box-shadow: 0 0 20px var(--accent-glow) !important;
+            outline: none;
+        }
+
+        .desktop-nav a, .desktop-nav a:visited, .desktop-nav a:link { text-decoration: none !important; }
+        .brand { text-decoration: none !important; }
+</style>
+</head>
+<body>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner" aria-hidden="true">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header" role="banner">
+        <div class="container nav-wrapper">
+            <a href="#" class="brand" aria-label="NEXTGENPLAYZ Home">
+                <img src="LOGO 2025.jpg" alt="NEXTGENPLAYZ Logo" class="logo-img" width="48" height="48">
+                <div>NEXTGEN<span>PLAYZ</span></div>
+            </a>
+
+            <nav role="navigation" aria-label="Main Navigation">
+                <div class="desktop-nav" id="nav-menu">
+                    <a href="#home" aria-current="page">HOME</a>
+                    <a href="#about">ABOUT</a>
+                    <a href="#services">SERVICES</a>
+                    <a href="#popular-content">POPULAR CONTENT</a>
+                    <a href="#hardware">HARDWARE</a>
+                    <a href="#contact">CONTACT</a>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+                <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero" role="main">
+        <div class="hero-content">
+            <span class="subtitle">Welcome to the Next Generation</span>
+            <h1 class="glitch-title" data-text="PROFESSIONAL 4K GAMING">PROFESSIONAL 4K GAMING</h1>
+            
+            <p class="hero-desc">Experience 4K/60fps capture mastery. Uncompressed, cinematic, and technically flawless assets for developers & publishers.</p>
+            
+            <div class="hero-btn-group">
+                <a href="https://www.youtube.com/@nextgenplayz1" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    Watch Channel
+                </a>
+                
+                <a href="#contact" class="btn-secondary">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" aria-hidden="true">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- PURE PERFORMANCE SECTION -->
+    <section id="about">
+        <div class="container section-header animate-on-scroll">
+            <span class="subtitle">The Vision</span>
+            <h2>Pure Performance</h2>
+            <p style="color:var(--text-muted); max-width: 600px; margin: 0 auto;">No watermarks. No commentary. Just the art of the game captured on the world's most powerful hardware.</p>
+        </div>
+
+        <div class="container">
+            <div class="stats-grid">
+                <div class="glass-card stat-card">
+                    <h3>20M+</h3>
+                    <p>Total Views</p>
+                </div>
+                <div class="glass-card stat-card">
+                    <h3>50K+</h3>
+                    <p>Subscribers</p>
+                </div>
+                <div class="glass-card stat-card">
+                    <h3 style="color: var(--accent);">4K 60</h3>
+                    <p>Native Capture</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+        <div class="container section-header animate-on-scroll">
+            <span class="subtitle">What I Do</span>
+            <h2>Services</h2>
+        </div>
+
+        <div class="container services-grid">
+            <div class="card animate-on-scroll">
+                <div class="card-icon" aria-hidden="true">🎮</div>
+                <h3>Gameplay Capture</h3>
+                <p>Raw 4K/60fps footage from PS5 Pro, Xbox Series X, and high-end PC. Perfect for B-roll and reviews.</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-icon" aria-hidden="true">🎬</div>
+                <h3>Cinematic Trailers</h3>
+                <p>Edited, paced, and color-graded cinematic sequences to highlight narrative and atmosphere.</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-icon" aria-hidden="true">⚡</div>
+                <h3>Tech Showcases</h3>
+                <p>Deep dives into Ray Tracing, DLSS, and Engine capabilities for technical documentation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPULAR CONTENT SECTION -->
+    <section id="popular-content" class="popular-content">
+        <div class="container section-header animate-on-scroll">
+            <span class="subtitle">Featured Games</span>
+            <h2>Popular Content</h2>
+            <p style="color:var(--text-muted); max-width: 600px; margin: 0 auto;">Discover my most popular gameplay captures and cinematic showcases</p>
+        </div>
+
+        <div class="container">
+            <div class="games-grid">
+                <!-- Row 1 -->
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🕷️</span>
+                    <h3>Spider-Man</h3>
+                    <p>Web-slinging action in stunning 4K with ray tracing enabled</p>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🏹</span>
+                    <h3>Tomb Raider</h3>
+                    <p>Epic adventure sequences showcasing next-gen graphics</p>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🧟</span>
+                    <h3>The Last of Us</h3>
+                    <p>Emotional storytelling with photorealistic environments</p>
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🗺️</span>
+                    <h3>Uncharted</h3>
+                    <p>Cinematic action sequences and breathtaking landscapes</p>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">⚔️</span>
+                    <h3>God of War</h3>
+                    <p>Mythological combat in stunning Norse realms</p>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🚗</span>
+                    <h3>GTA 5</h3>
+                    <p>Open-world mayhem captured in ultra-realistic detail</p>
+                </div>
+                
+                <!-- Row 3 -->
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🎯</span>
+                    <h3>Hitman</h3>
+                    <p>Stealth assassination gameplay with global locations</p>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🔫</span>
+                    <h3>Call of Duty</h3>
+                    <p>Intense multiplayer action and cinematic campaign moments</p>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <span class="game-icon">🐎</span>
+                    <h3>Red Dead Redemption 2</h3>
+                    <p>Western epic with unparalleled attention to detail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HARDWARE SECTION -->
+    <section id="hardware" style="background: rgba(255,255,255,0.02);">
+        <div class="container section-header animate-on-scroll" style="margin-bottom: 40px;">
+            <h2>Hardware Power</h2>
+            <p style="color:var(--text-muted)">Capturing on the latest hardware for maximum fidelity.</p>
+        </div>
+        <div class="container hardware-grid animate-on-scroll">
+            <div class="hardware-item">
+                <div class="hardware-text-frame">
+                    <h3>PS5 PRO</h3>
+                </div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-text-frame">
+                    <h3>PC</h3>
+                </div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-text-frame">
+                    <h3>XBOX X</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="container section-header animate-on-scroll">
+            <span class="subtitle">Get In Touch</span>
+            <h2>Contact Me</h2>
+        </div>
+
+        <div class="container contact-section-wrapper animate-on-scroll">
+            <div class="info-card">
+                <!-- Email -->
+                <a href="mailto:contact.nextgenplayz@gmail.com" class="info-row clickable">
+                    <div class="info-icon-box">✉️</div>
+                    <div class="info-content">
+                        <h4>Email</h4>
+                        <p>contact.nextgenplayz@gmail.com</p>
+                    </div>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@nextgenplayz1" target="_blank" rel="noopener noreferrer" class="info-row clickable">
+                    <div class="info-icon-box">▶</div>
+                    <div class="info-content">
+                        <h4>YouTube</h4>
+                        <p>@nextgenplayz1</p>
+                    </div>
+                </a>
+
+                <!-- Platform Support -->
+                <div class="info-row clickable">
+                    <div class="info-icon-box">🎮</div>
+                    <div class="info-content" style="width:100%">
+                        <h4>Platform Support</h4>
+                        <div class="platform-list">
+                            <span class="platform-badge">
+                                <svg class="plat-svg" viewBox="0 0 24 24"><path d="M23.6 8.9c-.1-.6-1.2-1-2.6-1-1.1 0-1.8.3-1.8.3l-5.7 2.2-6.3-2.6s-.8-.3-1.8-.3c-2.8 0-5.4 2.7-5.4 2.7l1.6 2.1s1.9-1.8 3.5-1.8c.6 0 1 .1 1.5.2l-1 4-4 1.4s-.4.1-.4.6c0 .3.3.6.8.6.8 0 2.2-.6 3.6-1.1l4.9-1.8s1.6-.5 1.6-.5c0 0 1.4 3 1.4 3s.5 1 1.7 1c1.7 0 3.3-1.8 3.3-1.8l-1.4-2.3s-1.1 1.1-1.9 1.1c-.3 0-.4-.2-.5-.4l-.9-2 4.8-1.7s2.6-.9 4.2-1.5c1.2-.4 2.5-1.4 2.4-2.3h0z"/></svg>
+                                PlayStation
+                            </span>
+                            <span class="platform-badge">
+                                <svg class="plat-svg" viewBox="0 0 24 24"><path d="M11 11.2c-1.8 2.8-4.1 5.3-6.4 5.3-.7 0-1.3-.1-1.7-.3 1.1 2.9 4 4.9 7.3 4.9 3.2 0 6-2 7.2-4.7-.5.2-1.1.3-1.8.3-2 0-4-2-5.8-4.7l.7-1 .7 1zm1-1.4l-.7-1-.7 1c-1.7-2.6-3.4-4.7-5.1-5.2C6.6 3.5 8.2 3 10 3c2.4 0 4.6.9 6.1 2.5-1.6.6-3.1 2.6-4.1 4.3zM22 12c0-5.5-4.5-10-10-10S2 6.5 2 12s4.5 10 10 10 10-4.5 10-10zm-1.8 2.1c0-.1 0-.2 0-.4 0-1.8-.6-3.5-1.7-5-1.1 3.5-4.4 8.4-8 8.4 0 0-.1 0-.2 0 1.6.5 3.3.8 5.1.8 1.7 0 3.4-.2 5-.7 0-.3.1-.6.1-.8 0-.8-.1-1.6-.4-2.2zM2.9 7.2c0 .3-.1.6-.1.9 0 .8.1 1.6.4 2.2 0 .1 0 .2 0 .4 0 1.8.6 3.5 1.6 4.9 1-3.5 4.3-8.3 7.7-8.4 0 0 0 0 0 0-1.8 0-3.5.3-5.2.8-.5-.2-1.1-.5-1.7-.7-.2.3-.5.6-.7.9z"/></svg>
+                                Xbox
+                            </span>
+                            <span class="platform-badge">
+                                <svg class="plat-svg" viewBox="0 0 24 24"><path d="M0 3.4L9.7 2.1v9.4l-9.7 0v-8.1zm10.9-1.7l13-1.8v11.6l-13 0V1.7zm-10.9 11.2l9.7 0v8.9l-9.7-1.3v-7.6zm10.9 0l13 0v10.9l-13-1.8v-9.2z"/></svg>
+                                PC
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-logo">NEXTGEN<span>PLAYZ</span></div>
+            <p class="footer-copy">&copy; 2025 NextGenPlayz. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ALL JAVASCRIPT CODE -->
+    <script>
+        // === PERFORMANCE OPTIMIZATIONS ===
+        
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading spinner
+            document.getElementById('loading-spinner').style.display = 'none';
+            
+            // Initialize all functionality
+            initScrollAnimations();
+            initLazyLoading();
+            initSmoothScrolling();
+            initThemeToggle();
+            initBackToTop();
+            
+            // Performance monitoring
+            if ('performance' in window) {
+                console.log('DOM loaded in: ', performance.now().toFixed(2), 'ms');
+            }
+        });
+
+        // === BACK TO TOP BUTTON ===
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            function toggleBackToTop() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            }
+            
+            // Scroll event listener
+            window.addEventListener('scroll', toggleBackToTop);
+            
+            // Click event listener
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Initial check
+            toggleBackToTop();
+        }
+
+        // === THEME TOGGLE ===
+        function initThemeToggle() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            
+            // Check for saved theme preference or prefer OS setting
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+                document.body.classList.add('light-mode');
+                themeIcon.textContent = '☀️';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    themeIcon.textContent = '☀️';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    themeIcon.textContent = '🌙';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+
+        // === MOBILE MENU TOGGLE ===
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            const toggle = document.querySelector('.mobile-toggle');
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            
+            nav.classList.toggle('active');
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // === SCROLL ANIMATIONS ===
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Add staggered animation for multiple elements
+                        if (entry.target.classList.contains('card') || 
+                            entry.target.classList.contains('game-card') ||
+                            entry.target.classList.contains('hardware-item')) {
+                            const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 100;
+                            entry.target.style.transitionDelay = `${delay}ms`;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animate-on-scroll elements
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // === SMOOTH SCROLLING ===
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile menu if open
+                        const nav = document.getElementById('nav-menu');
+                        const toggle = document.querySelector('.mobile-toggle');
+                        if (nav.classList.contains('active')) {
+                            nav.classList.remove('active');
+                            toggle.setAttribute('aria-expanded', 'false');
+                            document.body.style.overflow = '';
+                        }
+                    }
+                });
+            });
+        }
+
+        // === LAZY LOADING ===
+        function initLazyLoading() {
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+        }
+
+        // === HEADER SCROLL EFFECT ===
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // === LOGO FALLBACK LOGIC ===
+        const logoImg = document.querySelector('.logo-img');
+        const logoFallback = document.querySelector('.logo-fallback');
+        
+        if(logoImg) {
+            logoImg.addEventListener('error', function() {
+                this.style.display = 'none';
+                if(logoFallback) logoFallback.style.display = 'flex';
+            });
+            
+            // If image is already loaded, hide fallback
+            if(logoImg.complete && logoImg.naturalHeight !== 0) {
+                if(logoFallback) logoFallback.style.display = 'none';
+            }
+        }
+
+        // === CLOSE MOBILE MENU WHEN CLICKING OUTSIDE ===
+        document.addEventListener('click', (e) => {
+            const nav = document.getElementById('nav-menu');
+            const toggle = document.querySelector('.mobile-toggle');
+            const themeToggle = document.getElementById('theme-toggle');
+            
+            if (nav.classList.contains('active') && 
+                !nav.contains(e.target) && 
+                !toggle.contains(e.target) &&
+                !themeToggle.contains(e.target)) {
+                nav.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // === PERFORMANCE METRICS ===
+        window.addEventListener('load', function() {
+            // Measure Core Web Vitals (simplified)
+            if ('performance' in window) {
+                const navTiming = performance.getEntriesByType('navigation')[0];
+                console.log('Page loaded in: ', (navTiming.loadEventEnd - navTiming.navigationStart).toFixed(2), 'ms');
+            }
+        });
+
+        // === REDUCED MOTION PREFERENCE ===
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--ease', 'cubic-bezier(0, 0, 0, 0)');
+        }
+    </script>
+</body>
+</html>
