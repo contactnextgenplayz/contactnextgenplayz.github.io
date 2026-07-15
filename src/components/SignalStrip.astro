@@ -1,0 +1,109 @@
+---
+// The site's signature animation moment: a continuously-scrolling
+// signal waveform divider between Hero and About.
+// Both waveforms below are the exact same hand-tuned, seamlessly-tileable
+// polyline (480x64, first and last point identical) — one drawn in the
+// site's cyan "data" color scrolling left, one in the red "signal" color
+// at low opacity scrolling right a little slower, so they drift in and
+// out of phase instead of ever looking perfectly synced/mechanical.
+const WAVE_POINTS =
+  "0,32 5,32.8 10,33.6 15,34.3 20,35 25,35.7 30,36.2 35,36.8 40,37.2 45,37.5 50,37.8 55,37.9 60,38 65,37.9 70,37.8 75,37.4 80,36.5 85,34.5 90,30.5 95,24.4 100,18 105,14.3 110,15.4 115,20 120,25.1 125,28.7 130,31.7 135,36.6 140,42.6 145,44.2 150,38.9 155,32 160,28 165,26.7 170,26.2 175,26.1 180,26 185,26.1 190,26.2 195,26.5 200,26.8 205,27.2 210,27.8 215,28.3 220,29 225,29.7 230,30.4 235,31.2 240,32 245,32.8 250,33.6 255,34.4 260,35.4 265,36.6 270,38.3 275,40.7 280,43.6 285,47 290,49.9 295,51.7 300,51.8 305,50.1 310,47.2 315,43.5 320,39.2 325,33.7 330,27.9 335,24.2 340,24.4 345,27.5 350,30.5 355,31.8 360,31.8 365,31.2 370,30.4 375,29.7 380,29 385,28.3 390,27.8 395,27.2 400,26.8 405,26.5 410,26.2 415,26.1 420,26 425,26.1 430,26.2 435,26.5 440,26.8 445,27.2 450,27.8 455,28.3 460,29 465,29.7 470,30.4 475,31.2 480,32";
+
+// 10 copies is comfortably wider than any real viewport (10 x 480px =
+// 4800px) so the strip never runs out of tile before the animation
+// loops back around.
+const TILE_COUNT = 10;
+---
+
+<div class="signal-strip" role="presentation" aria-hidden="true">
+  <div class="signal-track signal-track-data">
+    {
+      Array.from({ length: TILE_COUNT }).map(() => (
+        <svg class="signal-tile" viewBox="0 0 480 64" preserveAspectRatio="none">
+          <polyline points={WAVE_POINTS} fill="none" stroke="var(--color-data)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      ))
+    }
+  </div>
+  <div class="signal-track signal-track-signal">
+    {
+      Array.from({ length: TILE_COUNT }).map(() => (
+        <svg class="signal-tile" viewBox="0 0 480 64" preserveAspectRatio="none">
+          <polyline points={WAVE_POINTS} fill="none" stroke="var(--color-signal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      ))
+    }
+  </div>
+  <div class="signal-strip-fade signal-strip-fade-l"></div>
+  <div class="signal-strip-fade signal-strip-fade-r"></div>
+</div>
+
+<style>
+  .signal-strip {
+    position: relative;
+    overflow: hidden;
+    height: 64px;
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-void);
+  }
+
+  .signal-track {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .signal-track-data {
+    opacity: 0.9;
+    animation: signal-scroll-left 16s linear infinite;
+  }
+  .signal-track-signal {
+    opacity: 0.3;
+    animation: signal-scroll-right 22s linear infinite;
+  }
+
+  .signal-tile {
+    flex: none;
+    width: 480px;
+    height: 64px;
+    display: block;
+  }
+
+  /* Shifting by exactly one tile's width loops seamlessly, since every
+     tile is an identical copy — the "jump" back to 0% at the end of each
+     animation cycle is visually indistinguishable from mid-scroll. */
+  @keyframes signal-scroll-left {
+    to { transform: translateX(-480px); }
+  }
+  @keyframes signal-scroll-right {
+    from { transform: translateX(-480px); }
+    to { transform: translateX(0); }
+  }
+
+  /* Soft fade at both edges so the tiling never reads as a hard-edged
+     filmstrip, and so it blends into the sections above/below it. */
+  .signal-strip-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: min(18%, 140px);
+    pointer-events: none;
+  }
+  .signal-strip-fade-l {
+    left: 0;
+    background: linear-gradient(90deg, var(--color-void), transparent);
+  }
+  .signal-strip-fade-r {
+    right: 0;
+    background: linear-gradient(270deg, var(--color-void), transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signal-track-data,
+    .signal-track-signal {
+      animation: none;
+    }
+  }
+</style>

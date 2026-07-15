@@ -1,0 +1,161 @@
+---
+import "@/styles/global.css";
+import { site } from "@/lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Set true on utility pages (404, etc.) to keep them out of search results. */
+  noindex?: boolean;
+}
+
+const {
+  title = `${site.name} | ${site.tagline}`,
+  description = site.description,
+  noindex = false,
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, site.url);
+
+/**
+ * SECURITY: Content-Security-Policy, delivered via <meta http-equiv>.
+ *
+ * GitHub Pages serves static files only — it does not let us set real
+ * HTTP response headers, so this <meta> tag is the strongest CSP we can
+ * ship without moving off GitHub Pages. A couple of directives (notably
+ * `frame-ancestors`) are ignored by browsers when delivered this way; see
+ * the README for what that means and how to close that gap later if you
+ * ever move to a custom domain behind something like Cloudflare.
+ *
+ * `'unsafe-inline'` is kept for scripts/styles because Astro's own island
+ * hydration runtime and Motion's server-rendered initial styles rely on
+ * small inline <script>/style attributes to work at all — without it the
+ * mobile menu, counters, and portfolio filters would silently stop
+ * working. Every other directive is locked down to only what this site
+ * actually uses, so injecting a *new* external script, frame, or fetch
+ * target is still blocked.
+ */
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https://i.ytimg.com https://yt3.googleusercontent.com",
+  "font-src 'self'",
+  "connect-src 'self' https://formspree.io",
+  "frame-src https://www.youtube-nocookie.com",
+  "form-action 'self' https://formspree.io",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: site.name,
+      url: site.channelUrl,
+      sameAs: [site.channelUrl, site.twitter],
+      jobTitle: "Content Creator & Video Editor",
+      description: site.description,
+    },
+    {
+      "@type": "WebSite",
+      name: site.name,
+      url: site.url,
+      description: site.description,
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#0a0b0e" />
+
+    <!-- SECURITY: see the `csp` comment above for what this does and doesn't cover on GitHub Pages. -->
+    <meta http-equiv="Content-Security-Policy" content={csp} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!--
+      Day/night mode, applied before first paint.
+      This tiny inline script is intentionally the very first thing that
+      runs: it reads the visitor's saved choice (or falls back to this
+      site's designed-for-dark look) and sets it on <html> synchronously,
+      so the page never "flashes" the wrong theme for a frame.
+      is:inline tells Astro to ship it exactly as written, unprocessed.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("ngp-theme");
+          var theme = stored === "light" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+          document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute("content", theme === "light" ? "#f7f8fa" : "#0a0b0e");
+        } catch (err) {
+          // localStorage can throw in some locked-down/private browsing
+          // contexts — the site still works, it just always boots dark.
+        }
+      })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="4K Gaming, PS5 PRO, Xbox Series X, PC, Premium Gameplay Videos"
+    />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL("/og-image.jpg", site.url)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/og-image.jpg", site.url)} />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <slot />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-signal);
+    color: white;
+    padding: 10px 16px;
+    z-index: 2000;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0 0 8px 0;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+</style>

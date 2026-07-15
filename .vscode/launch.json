@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Siteyi çalıştır (F5)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "dev: Astro sunucusunu başlat"
+    }
+  ]
+}

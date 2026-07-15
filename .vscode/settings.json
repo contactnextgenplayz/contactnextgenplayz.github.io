@@ -1,0 +1,27 @@
+{
+  "files.associations": {
+    "*.astro": "astro"
+  },
+
+  // Tailwind IntelliSense'in .astro dosyalarındaki class="" içinde de
+  // otomatik tamamlama önerebilmesi için.
+  "tailwindCSS.includeLanguages": {
+    "astro": "html"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  // Astro'nun otomatik ürettiği tip önbelleği ve build çıktısını
+  // Explorer/arama sonuçlarında gizle — elle dokunulmaması gereken,
+  // her build'de yeniden oluşan klasörler.
+  "files.exclude": {
+    "**/.astro": true,
+    "**/dist": true
+  },
+  "search.exclude": {
+    "**/.astro": true,
+    "**/dist": true,
+    "**/package-lock.json": true
+  }
+}

@@ -1,0 +1,38 @@
+---
+import StatsBar from "@/components/StatsBar";
+import { getChannelStats } from "@/lib/youtube";
+import { site, stats as fallbackStats } from "@/lib/site";
+
+// Live subscriber/view counts — only runs if YOUTUBE_API_KEY is set
+// (see src/lib/youtube.ts for setup). Returns null otherwise or on any
+// fetch failure, in which case we quietly keep the static placeholders
+// from src/lib/site.ts, so this can never break the build.
+const liveStats = await getChannelStats(site.channelId);
+
+function formatStat(raw: string | undefined, suffix: string, fallback: string): string {
+  const value = Number(raw);
+  if (!raw || !Number.isFinite(value)) return fallback;
+  const compact = new Intl.NumberFormat("en", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value);
+  return `${compact} ${suffix}`;
+}
+
+const totalViews = formatStat(liveStats?.viewCount, "Views", fallbackStats.totalViews);
+const subscribers = formatStat(liveStats?.subscriberCount, "Subscribers", fallbackStats.subscribers);
+---
+
+<section id="about" class="px-6 py-28">
+  <div class="mx-auto max-w-3xl text-center">
+    <span class="mono-tag text-signal">The Vision</span>
+    <h2 class="mt-3 font-display text-4xl font-bold text-ink sm:text-5xl">Pure Performance</h2>
+    <p class="mt-5 text-lg text-ink-muted">
+      Premium gameplay capture built around clarity, clean framing, and a polished viewing experience from the first frame to the last.
+    </p>
+  </div>
+
+  <div class="mx-auto max-w-4xl">
+    <StatsBar client:visible totalViews={totalViews} subscribers={subscribers} />
+  </div>
+</section>

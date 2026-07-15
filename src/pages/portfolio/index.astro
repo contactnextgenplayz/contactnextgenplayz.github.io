@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import PortfolioGrid from "@/components/PortfolioGrid";
+import { site } from "@/lib/site";
+---
+
+<BaseLayout
+  title={`Most Popular Videos | ${site.name}`}
+  description="A focused selection of the channel's most popular gameplay videos, presented with clean thumbnails and direct YouTube access."
+>
+  <Header />
+  <main id="main-content" class="pt-32">
+    <section class="px-6 pb-16">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="font-display text-4xl font-bold text-ink sm:text-5xl">Most Popular Videos</h1>
+      </div>
+    </section>
+    <section class="px-6 pb-28">
+      <div class="mx-auto max-w-6xl">
+        <PortfolioGrid client:visible />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

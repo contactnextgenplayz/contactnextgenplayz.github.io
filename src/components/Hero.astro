@@ -1,0 +1,220 @@
+---
+import { site } from "@/lib/site";
+import { getLatestVideo, getVideoThumbnail } from "@/lib/youtube";
+
+// Pulls the channel's latest upload at build time from YouTube's public feed.
+const latestVideo = await getLatestVideo(site.channelId);
+const latestVideoHref = latestVideo
+  ? `https://www.youtube.com/watch?v=${latestVideo.videoId}`
+  : `${site.channelUrl}/videos`;
+const latestVideoTitle = latestVideo?.title ?? "Latest Upload";
+const latestVideoThumb = latestVideo
+  ? getVideoThumbnail(latestVideo.videoId, "maxresdefault")
+  : "/og-image.jpg";
+---
+
+<section id="home" class="hero-bg relative flex min-h-screen items-center justify-center px-6">
+  <span class="hero-corner hero-corner-tl" aria-hidden="true"></span>
+  <span class="hero-corner hero-corner-br" aria-hidden="true"></span>
+  <canvas class="hero-fluid" data-hero-fluid aria-hidden="true"></canvas>
+  <div class="mx-auto max-w-4xl text-center">
+    <a
+      href={latestVideoHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hero-in glass mb-6 flex max-w-[90vw] items-center gap-3 overflow-hidden rounded-2xl p-3 text-left transition-colors hover:border-line-strong sm:mx-auto sm:max-w-2xl"
+    >
+      <span class="relative h-16 w-28 shrink-0 overflow-hidden rounded-xl border border-line bg-elevated sm:h-20 sm:w-36">
+        <img
+          data-latest-thumb
+          data-primary-src={latestVideoThumb}
+          data-hq-src={latestVideo ? getVideoThumbnail(latestVideo.videoId, "hqdefault") : "/og-image.jpg"}
+          data-mq-src={latestVideo ? getVideoThumbnail(latestVideo.videoId, "mqdefault") : "/og-image.jpg"}
+          data-fallback-src="/og-image.jpg"
+          src={latestVideoThumb}
+          alt={latestVideoTitle}
+          loading="lazy"
+          class="h-full w-full object-cover"
+        />
+      </span>
+      <span class="min-w-0 flex-1">
+        <span class="mono-tag text-signal">Latest Video</span>
+        <span class="mt-1 block truncate text-sm text-ink-muted sm:text-base">{latestVideoTitle}</span>
+      </span>
+      <span class="shrink-0 text-ink-faint" aria-hidden="true">↗</span>
+    </a>
+    <div class="hero-in mb-6 flex items-center justify-center gap-3 [animation-delay:0.05s]">
+      <span class="mono-tag flex items-center gap-2 text-signal">
+        <span class="rec-dot"></span> REC
+      </span>
+      <span class="h-3 w-px bg-line-strong"></span>
+      <span class="mono-tag text-data">4K · 60FPS · PREMIUM</span>
+    </div>
+
+    <h1 class="hero-in font-display text-[clamp(2.75rem,8vw,6rem)] font-bold leading-[0.95] tracking-tight text-ink [animation-delay:0.15s]">
+      PREMIUM 4K GAMEPLAY
+    </h1>
+
+    <p class="hero-in mx-auto mt-7 max-w-xl text-balance text-lg text-ink-muted [animation-delay:0.3s]">
+      Premium gameplay capture across PS5 PRO, Xbox Series X, and PC — with clean presentation, automatic updates, and a thumbnail-first viewing experience.
+    </p>
+
+    <div class="hero-in mt-10 flex flex-wrap items-center justify-center gap-4 [animation-delay:0.45s]">
+      <a
+        href={site.channelUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-md bg-signal px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-wide text-white shadow-[0_8px_30px_-8px_rgba(255,70,85,0.5)] transition-transform hover:-translate-y-0.5"
+      >
+        Watch the Channel
+      </a>
+      <a
+        href="/#popular"
+        class="glass rounded-md px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:border-line-strong"
+      >
+        Most Popular Videos
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-in absolute bottom-10 left-1/2 -translate-x-1/2 text-ink-faint [animation-delay:0.6s]" aria-hidden="true">
+    <svg width="20" height="28" viewBox="0 0 20 28" fill="none"><rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" stroke-width="1.5"/><circle class="scroll-dot" cx="10" cy="9" r="2" fill="currentColor"/></svg>
+  </div>
+</section>
+
+<script>
+  import { mountHeroFluid } from "@/lib/heroFluid";
+
+  const hero = document.getElementById("home");
+  const fluidCanvas = hero?.querySelector("[data-hero-fluid]");
+  if (hero instanceof HTMLElement && fluidCanvas instanceof HTMLCanvasElement) {
+    mountHeroFluid(hero, fluidCanvas);
+  }
+
+  const thumbnails = document.querySelectorAll("[data-latest-thumb]");
+
+  thumbnails.forEach((img) => {
+    if (!(img instanceof HTMLImageElement)) return;
+
+    const qualityOrder = [
+      img.dataset.primarySrc || img.src,
+      img.dataset.hqSrc || img.src,
+      img.dataset.mqSrc || img.src,
+      img.dataset.fallbackSrc || "/og-image.jpg",
+    ];
+    let index = 0;
+
+    const swap = () => {
+      index += 1;
+      if (index >= qualityOrder.length) return;
+      img.src = qualityOrder[index];
+    };
+
+    img.addEventListener("error", swap);
+  });
+</script>
+
+<style>
+  .hero-bg {
+    background-color: var(--color-void);
+    isolation: isolate;
+  }
+  .hero-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 20%, var(--color-signal-soft), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, var(--color-data-soft), transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, var(--color-line) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, var(--color-line) 40px);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 40%, transparent 90%);
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 40%, transparent 90%);
+  }
+
+  /* WebGL fluid mouse trail (src/lib/heroFluid). The canvas itself is
+     always transparent where there's no dye, so the blend mode only ever
+     affects the areas the fluid actually occupies — dark mode "screen"s
+     the glow onto the near-black void, light mode "multiply"s a soft
+     tint onto the near-white one (screen would just wash out to white
+     there). If the browser can't do WebGL, or the person has reduced
+     motion enabled, mountHeroFluid() simply never draws to this canvas
+     and the static gradient/grid backdrop above is all that's shown. */
+  .hero-fluid {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.92;
+  }
+  html[data-theme="light"] .hero-fluid {
+    mix-blend-mode: multiply;
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fluid {
+      display: none;
+    }
+  }
+
+  /* Viewfinder corner brackets — real elements, not pseudo-elements,
+     since ::before is already used for the masked background above. */
+  .hero-corner {
+    position: absolute;
+    pointer-events: none;
+    width: 26px;
+    height: 26px;
+    opacity: 0.85;
+  }
+  .hero-corner-tl {
+    top: 32px;
+    left: 32px;
+    border-top: 2px solid var(--color-data);
+    border-left: 2px solid var(--color-data);
+  }
+  .hero-corner-br {
+    bottom: 32px;
+    right: 32px;
+    border-bottom: 2px solid var(--color-data);
+    border-right: 2px solid var(--color-data);
+  }
+
+  .rec-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-signal);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+
+  .hero-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: heroIn 0.8s var(--ease-out-expo) forwards;
+  }
+  @keyframes heroIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .scroll-dot {
+    animation: scroll 1.8s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes scroll {
+    0%, 20% { transform: translateY(0); opacity: 1; }
+    60% { transform: translateY(10px); opacity: 0; }
+    61% { transform: translateY(-10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+</style>

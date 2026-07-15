@@ -1,0 +1,38 @@
+{
+  "name": "nextgenplayz",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "og:generate": "node -e \"require('sharp')('scripts/og-image-source.svg').jpeg({quality:90}).toFile('public/og-image.jpg')\""
+  },
+  "keywords": [],
+  "author": "NextGenPlayz",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/react": "^6.0.1",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/space-grotesk": "^5.2.10",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "astro": "^7.0.7",
+    "lucide-react": "^1.24.0",
+    "motion": "^12.42.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@tailwindcss/vite": "^4.3.2",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^6.0.3"
+  }
+}

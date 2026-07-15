@@ -1,0 +1,6 @@
+# If you believe you've found a security issue with this website
+# (not the YouTube channel itself), please let us know.
+Contact: mailto:contact.nextgenplayz@gmail.com
+Expires: 2027-07-13T00:00:00.000Z
+Preferred-Languages: en, tr
+Canonical: https://contactnextgenplayz.github.io/.well-known/security.txt

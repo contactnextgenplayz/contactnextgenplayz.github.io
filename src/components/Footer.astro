@@ -1,0 +1,45 @@
+---
+import { site, navLinks } from "@/lib/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-[#050609] px-6 py-12 text-center">
+  <div class="mx-auto max-w-4xl">
+    <a href="/" class="font-display text-lg font-bold text-ink">
+      NEXTGEN<span class="text-signal">PLAYZ</span>
+    </a>
+
+    <nav aria-label="Footer" class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+      {
+        navLinks.map((link) => (
+          <a href={`/${link.href}`} class="mono-tag text-ink-muted transition-colors hover:text-ink">
+            {link.label}
+          </a>
+        ))
+      }
+      <a href="/portfolio/" class="mono-tag text-ink-muted transition-colors hover:text-ink">
+        Portfolio
+      </a>
+    </nav>
+
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+      <a
+        href={`mailto:${site.email}`}
+        class="mono-tag text-ink-faint transition-colors hover:text-signal"
+      >
+        Email
+      </a>
+      <a
+        href={site.channelUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mono-tag text-ink-faint transition-colors hover:text-signal"
+      >
+        YouTube
+      </a>
+    </div>
+
+    <p class="mt-6 text-xs text-ink-faint">&copy; {year} NextGenPlayz. All rights reserved.</p>
+  </div>
+</footer>

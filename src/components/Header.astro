@@ -1,0 +1,105 @@
+---
+import MobileNav from "@/components/MobileNav";
+import ThemeToggle from "@/components/ThemeToggle";
+import { site, navLinks } from "@/lib/site";
+import { getChannelAvatar } from "@/lib/youtube";
+
+const avatarUrl = (await getChannelAvatar(site.channelUrl)) ?? "/logo.svg";
+---
+
+<header id="site-header" class="fixed top-0 left-0 z-50 w-full py-5 transition-all duration-300">
+  <div class="mx-auto flex w-[90%] max-w-[1280px] items-center justify-between">
+    <a href="/" class="flex items-center gap-3 font-display text-xl font-bold text-ink">
+      <span class="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-line bg-elevated">
+        <img
+          id="channel-avatar"
+          data-channel-avatar
+          src={avatarUrl}
+          alt={`${site.name} channel avatar`}
+          class="h-10 w-10 rounded-full object-cover"
+        />
+      </span>
+      <span>NEXTGEN<span class="text-signal">PLAYZ</span></span>
+    </a>
+
+    <div class="flex items-center gap-3 sm:gap-5">
+      <nav class="hidden items-center gap-8 md:flex">
+        {
+          navLinks.map((link) => (
+            <a
+              href={`/${link.href}`}
+              data-nav-link={link.href.replace("#", "")}
+              class="nav-link mono-tag text-ink-muted transition-colors hover:text-ink"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <a
+          href="/#contact"
+          class="rounded-md bg-signal px-5 py-2.5 font-display text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+        >
+          Contact Me
+        </a>
+      </nav>
+
+      <ThemeToggle client:load />
+      <MobileNav client:load />
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 20) {
+      header.classList.add("bg-void/85", "backdrop-blur-xl", "border-b", "border-line", "py-3");
+    } else {
+      header.classList.remove("bg-void/85", "backdrop-blur-xl", "border-b", "border-line", "py-3");
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const avatar = document.getElementById("channel-avatar");
+  if (avatar instanceof HTMLImageElement) {
+    avatar.addEventListener("error", () => {
+      if (avatar.dataset.fallbackApplied === "true") return;
+      avatar.dataset.fallbackApplied = "true";
+      avatar.src = "/logo.svg";
+    });
+  }
+
+  // Highlight whichever nav link matches the section currently in view.
+  // On pages without these sections (e.g. /portfolio, 404) `sections`
+  // ends up empty and this quietly does nothing.
+  const navLinkEls = document.querySelectorAll(".nav-link[data-nav-link]");
+  const sections = Array.from(navLinkEls)
+    .map((link) => document.getElementById(link.getAttribute("data-nav-link") || ""))
+    .filter((el) => el !== null);
+
+  if (sections.length > 0) {
+    const setActiveLink = (id: string) => {
+      navLinkEls.forEach((link) => {
+        const isActive = link.getAttribute("data-nav-link") === id;
+        link.classList.toggle("text-ink", isActive);
+        link.classList.toggle("text-ink-muted", !isActive);
+      });
+    };
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (visible.length === 0) return;
+        const topMost = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+        );
+        setActiveLink(topMost.target.id);
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
+</script>

@@ -1,0 +1,7 @@
+{
+  // VS Code, bu klasörü ilk açtığında bunları kurmanı önerecek (tek
+  // tıkla kurulur). Astro uzantısı olmadan .astro dosyaları düzgün
+  // renklendirilmez/IntelliSense çalışmaz — bu yüzden "recommended"
+  // değil, pratikte zorunlu gibi düşün.
+  "recommendations": ["astro-build.astro-vscode", "bradlc.vscode-tailwindcss"]
+}
