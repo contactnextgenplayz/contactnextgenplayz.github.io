@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# build output & caches
+dist/
+.astro/
+.cache/
+
+# environment variables (keep the documented template)
+.env
+.env.*
+!.env.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / archives
+.DS_Store
+Thumbs.db
+*.zip

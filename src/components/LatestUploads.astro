@@ -1,0 +1,94 @@
+---
+import { site } from "@/lib/site";
+import { formatPublishedDate, formatViews, getThumbnailChain, getVideoUrl, type LatestVideo } from "@/lib/youtube-shared";
+
+interface Props {
+  initialVideos: LatestVideo[];
+}
+
+// Rendered from build-time data (YouTube's public feeds, no API key). The
+// scheduled GitHub Actions build refreshes it every hour.
+const { initialVideos } = Astro.props;
+---
+
+<section id="latest" class="px-6 py-28">
+  <div class="mx-auto max-w-3xl text-center">
+    <span class="mono-tag text-signal">Fresh Uploads</span>
+    <h2 class="mt-3 font-display text-4xl font-bold text-ink sm:text-5xl">Latest Videos</h2>
+    <p class="mt-5 text-lg text-ink-muted">
+      The newest uploads from NextGenPlayz, pulled directly from the channel and kept separate from the hand-picked popular archive.
+    </p>
+  </div>
+
+  <div class="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" data-latest-grid>
+    {initialVideos.map((video, index) => {
+      const chain = getThumbnailChain(video.videoId, video.thumb ?? "maxresdefault");
+      const date = formatPublishedDate(video.publishedAt);
+      const views = formatViews(video.views);
+      return (
+        <article
+          class="group overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_18px_60px_-34px_rgba(0,0,0,0.8)]"
+          data-video-card
+          data-video-id={video.videoId}
+        >
+          <a
+            href={getVideoUrl(video.videoId, video.isShort)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block focus-visible:outline-none"
+            aria-label={`Watch ${video.title} on YouTube${date ? `, published ${date}` : ""}`}
+          >
+            <span class="relative block aspect-video overflow-hidden bg-elevated">
+              <img
+                src={chain[0]}
+                data-video-thumb
+                data-thumb-chain={chain.join(" ")}
+                alt={video.title}
+                width="1280"
+                height="720"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+              />
+              <span class="absolute left-4 top-4 rounded-full border border-white/15 bg-void/70 px-3 py-1.5 mono-tag text-white backdrop-blur-sm">
+                {index === 0 ? "Newest" : `#${index + 1}`}
+              </span>
+              <span class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-void/75 to-transparent" aria-hidden="true"></span>
+            </span>
+            <span class="block p-5">
+              <span class="mono-tag text-signal">YouTube Upload</span>
+              <h3 data-video-title class="mt-2 line-clamp-3 font-display text-lg font-semibold leading-snug text-ink">
+                {video.title}
+              </h3>
+              {(date || views) && (
+                <span class="mt-3 block mono-tag text-ink-faint" data-video-meta>
+                  {date && <time datetime={video.publishedAt}>{date}</time>}
+                  {date && views ? " · " : ""}
+                  {views}
+                </span>
+              )}
+            </span>
+          </a>
+        </article>
+      );
+    })}
+  </div>
+
+  <div class="mx-auto mt-8 max-w-6xl text-center">
+    <a
+      href={site.channelUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center rounded-md bg-cta px-6 py-3 font-display text-sm font-semibold uppercase tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-cta-hover active:translate-y-0 active:bg-cta-active"
+    >
+      View Channel
+    </a>
+  </div>
+</section>
+
+<script>
+  import { bindThumbnailFallback } from "@/lib/thumbnailFallback";
+
+  // Missing sizes / YouTube's grey 404 placeholder -> next thumbnail variant.
+  document.querySelectorAll<HTMLImageElement>("[data-latest-grid] img[data-video-thumb]").forEach(bindThumbnailFallback);
+</script>

@@ -1,0 +1,120 @@
+---
+import MobileNav from "@/components/MobileNav";
+import ThemeToggle from "@/components/ThemeToggle";
+import { site, navLinks } from "@/lib/site";
+---
+
+<header id="site-header" class="fixed top-0 left-0 z-50 w-full py-5 transition-all duration-300">
+  <div class="mx-auto flex w-[90%] max-w-[1280px] items-center justify-between">
+    <a href="/" class="flex items-center gap-3 font-display text-xl font-bold text-ink max-[360px]:text-base">
+      <span class="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-line bg-elevated">
+        <img
+          id="channel-avatar"
+          data-channel-avatar
+          src="/channel-logo.jpg"
+          alt={`${site.name} channel avatar`}
+          width="40"
+          height="40"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="h-10 w-10 rounded-full object-cover"
+        />
+      </span>
+      <span>NEXTGEN<span class="text-signal">PLAYZ</span></span>
+    </a>
+
+    <div class="flex items-center gap-3 sm:gap-5">
+      <nav aria-label="Primary" class="hidden items-center gap-5 lg:flex xl:gap-8">
+        {
+          navLinks.map((link) => (
+            <a
+              href={`/${link.href}`}
+              data-nav-link={link.href.replace("#", "")}
+              class="nav-link mono-tag text-ink-muted transition-colors hover:text-ink"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <a
+          href="/#contact"
+          class="rounded-md bg-cta px-5 py-2.5 font-display text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-cta-hover active:translate-y-0 active:bg-cta-active"
+        >
+          Contact Me
+        </a>
+      </nav>
+
+      <ThemeToggle client:load />
+      <MobileNav client:load />
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const onScroll = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 20);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+
+  // Highlight whichever nav link matches the section currently in view.
+  // On pages without these sections (e.g. /portfolio, 404) `sections`
+  // ends up empty and this quietly does nothing.
+  const navLinkEls = document.querySelectorAll(".nav-link[data-nav-link]");
+  const sections = Array.from(navLinkEls)
+    .map((link) => document.getElementById(link.getAttribute("data-nav-link") || ""))
+    .filter((el) => el !== null);
+
+  if (sections.length > 0) {
+    const setActiveLink = (id: string) => {
+      navLinkEls.forEach((link) => {
+        const isActive = link.getAttribute("data-nav-link") === id;
+        link.classList.toggle("text-ink", isActive);
+        link.classList.toggle("text-ink-muted", !isActive);
+      });
+    };
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (visible.length === 0) return;
+        const topMost = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+        );
+        setActiveLink(topMost.target.id);
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
+</script>
+
+<style>
+  /*
+   * Scrolled-header surface (same look as before: void/85 + 24px blur +
+   * bottom hairline). It is painted by a pseudo-element on purpose: a
+   * backdrop-filter on the <header> itself turns the header into the
+   * containing block of its position:fixed descendants, which clipped the
+   * mobile menu overlay and panel to the header's height after scrolling.
+   */
+  #site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    background-color: color-mix(in oklab, var(--color-void) 85%, transparent);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--color-line);
+    transition: opacity 0.3s ease;
+  }
+  #site-header.is-scrolled::before {
+    opacity: 1;
+  }
+</style>

@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev: Astro sunucusunu başlat",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^ERROR: (.*)$",
+          "message": 1
+        },
+        "background": {
+          // "npm run dev" çalıştığında Astro'nun terminale bastığı
+          // gerçek satırlarla eşleşir (bkz. README): sunucu bu satırı
+          // yazdığında VS Code onu "hazır" kabul eder.
+          "activeOnStart": true,
+          "beginsPattern": "astro dev",
+          "endsPattern": "watching for file changes"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    }
+  ]
+}

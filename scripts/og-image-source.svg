@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glowRed" cx="25%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#FF4655" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#FF4655" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="82%" cy="78%" r="50%">
+      <stop offset="0%" stop-color="#4CC9F0" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#4CC9F0" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0A0B0E"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glowRed)"/>
+  <rect width="1200" height="630" fill="url(#glowCyan)"/>
+
+  <!-- viewfinder corners -->
+  <path d="M 60 100 L 60 60 L 100 60" fill="none" stroke="#4CC9F0" stroke-width="3" opacity="0.85"/>
+  <path d="M 1140 530 L 1140 570 L 1100 570" fill="none" stroke="#4CC9F0" stroke-width="3" opacity="0.85"/>
+
+  <!-- REC indicator -->
+  <circle cx="100" cy="170" r="7" fill="#FF4655"/>
+  <text x="118" y="177" font-family="DejaVu Sans" font-size="20" letter-spacing="3" fill="#FF4655" font-weight="bold">REC</text>
+  <text x="1000" y="177" font-family="DejaVu Sans" font-size="20" letter-spacing="2" fill="#4CC9F0" font-weight="bold" text-anchor="end">4K · 60FPS · HDR</text>
+
+  <!-- Wordmark -->
+  <text x="100" y="330" font-family="DejaVu Sans" font-size="88" font-weight="bold" fill="#F4F5F7">NEXTGEN<tspan fill="#FF4655">PLAYZ</tspan></text>
+
+  <!-- Tagline -->
+  <text x="102" y="390" font-family="DejaVu Sans" font-size="28" fill="#9BA1AE">Ultra 4K Gaming &amp; Cinematic Captures</text>
+
+  <!-- divider -->
+  <rect x="102" y="430" width="140" height="3" fill="#FF4655"/>
+
+  <text x="102" y="480" font-family="DejaVu Sans" font-size="20" fill="#5C6270" letter-spacing="2">PS5 PRO   ·   RTX 4090   ·   XBOX SERIES X</text>
+</svg>
